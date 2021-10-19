@@ -22,14 +22,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#connect mongoDB
+# connect mongoDB
 load_dotenv()
 mongo_uri = os.getenv("mongo_uri")
-client = MongoClient(mongo_uri)
+print(mongo_uri)
+client = MongoClient(
+    "mongodb+srv://harsh:harsh@cluster0.2i28j.mongodb.net/harmony_users?retryWrites=true&w=majority")
 
-#add db
+# add db
 db = client.get_database("harmony_users")
-#add collection
+# add collection
 profile = db.user_profile
 
 
@@ -37,3 +39,20 @@ profile = db.user_profile
 def index():
     message = "Harmony is live!"
     return message
+
+
+class signup_data(BaseModel):
+    firstname: str
+    lastname: str
+    dob: str
+    email: str
+    pswd: str
+    cpswd: str
+
+
+@app.post("/signup/")
+def signup(data: signup_data):
+    data = data.dict()
+    print(data)
+    profile.insert_one(data)
+    return "user created successfully, login with same credentials."
