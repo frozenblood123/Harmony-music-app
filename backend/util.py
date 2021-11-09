@@ -28,3 +28,12 @@ def add_to_mongo(data, enc_pswd):
     data.pop("cpswd")
     data.update(pswd=enc_pswd)
     profile.insert_one(data)
+
+def get_password(email):
+    info=profile.find_one({"email": email})
+    stored_pswd=info["pswd"]
+    return stored_pswd
+
+def verify_password(entered_pswd,stored_pswd):
+    verification=sha256_crypt.verify(entered_pswd, stored_pswd)
+    return verification
