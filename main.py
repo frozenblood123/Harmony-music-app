@@ -8,6 +8,7 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
+from backend.util import *
 
 app = FastAPI(
     title="Harmony the music friend",
@@ -26,8 +27,7 @@ app.add_middleware(
 load_dotenv()
 mongo_uri = os.getenv("mongo_uri")
 print(mongo_uri)
-client = MongoClient(
-    "mongodb+srv://harsh:harsh@cluster0.2i28j.mongodb.net/harmony_users?retryWrites=true&w=majority")
+client = MongoClient(mongo_uri)
 
 # add db
 db = client.get_database("harmony_users")
@@ -53,6 +53,22 @@ class signup_data(BaseModel):
 @app.post("/signup/")
 def signup(data: signup_data):
     data = data.dict()
-    print(data)
-    profile.insert_one(data)
-    return "user created successfully, login with same credentials."
+    existing_user = check_user(data["email"])
+
+    if existing_user == True:
+        return "Email already registered, try again with another email"
+
+    if data["pswd"] != data["cpswd"]:
+        return "Passwords don't match, try again"
+    else:
+        enc_pswd = encrypt_password(data["pswd"])
+
+    try:
+        add_to_mongo(data, enc_pswd)
+    except:
+        raise ConnectionError
+
+    if ConnectionError:
+        return "Something went wrong, please try again"
+    else:
+        return "user created successfully, login with same credentials."
