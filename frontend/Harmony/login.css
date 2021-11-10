@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Garamond";
+}
+body {
+  /* background-color: #133B5C; */
+  background-image: linear-gradient(180deg, #133B5C , #1E5F74);
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+#main {
+  max-width: 95%;
+  width: 500px;
+}
+#tab-btn {
+  display: flex;
+}
+.login-tab,
+.register-tab {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  background-color: #37474f;
+  text-align: center;
+  color: #fff;
+  font-size: 25px;
+  padding: 10px;
+}
+.active {
+  background-color: #eee;
+  color: #000;
+}
+.login-box,
+.register-box {
+  width: 100%;
+  background-color: #eee;
+  padding: 20px 30px 30px 30px;
+  /* box-shadow: 2px 2px 5px #555; */
+}
+.register-box {
+  display: none;
+}
+.inp {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  border: 2px solid #888;
+  /* border-bottom: 5px solid #888; */
+  background-color: #fff;
+  color: #666;
+}
+.inp:focus {
+  outline: none;
+  border: 2px solid #133B5C;
+  /* border-bottom: 5px solid #555; */
+}
+.sub-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f44336;
+  color: #fff;
+  cursor: pointer;
+  /* border-bottom: 5px solid #444; */
+}
+.sub-btn:focus {
+  outline: none;
+}
+.sub-btn:hover{
+  transform: scale(1.02);
+}
+.sub-btn:active {
+  border: none;
+  color: black;
+}
+#forgot {
+  font-size: 20px;
+  color: #444;
+  text-decoration: none;
+  display: block;
+}
+h2 {
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 15px;
+  /* font-variant: small-caps; */
+  color: #333;
+  font-size: 30px;
+}
