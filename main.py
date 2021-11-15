@@ -5,8 +5,11 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from pydantic import BaseModel
 from typing import Optional
-from fastapi import FastAPI
-from fastapi.responses import PlainTextResponse
+from datetime import timedelta
+from starlette.responses import Response
+from fastapi import FastAPI, Depends, Request
+from fastapi.responses import PlainTextResponse, RedirectResponse
+from fastapi_login import LoginManager
 from fastapi.middleware.cors import CORSMiddleware
 from backend.util import *
 
@@ -63,19 +66,47 @@ def signup(data: signup_data):
         return "Something went wrong, please try again"
 
 
+SECRET = "800c17d0d605de7277d95019b816b2dd0736ec3cad4e0145"
+manager = LoginManager(SECRET, token_url='/login/', use_cookie=True)
+
+
+@manager.user_loader()
+def load_user(email: str):
+    user = email
+    return user
+
 @app.post("/login/")
-def login(data: login_data):
+def login(data: login_data, response: Response):
     data = data.dict()
     existing_user = check_user(data["email"])
-
+    user = load_user(data["email"])
     if existing_user == False:
         return "This email has not been registered. Please signup before logging in"
     elif existing_user == True:
         verification = verify_password(
             data["pswd"], get_password(data["email"]))
         if verification == True:
-            return "Login successful"
+            access_token = manager.create_access_token(
+                data={'sub': data['email']}, expires=timedelta(days=365))
+            #response = RedirectResponse(url='/dashboard', status_code=status.HTTP_302_FOUND)
+            manager.set_cookie(response, access_token)
+            #resp = RedirectResponse(url="/protected")
+            #return resp
+            #return "Login successful"
+            #return {'access_token': access_token, 'token_type': 'bearer'}
         else:
             return "Incorrect password"
     else:
         return "Something went wrong"
+
+
+@app.get('/protected')
+def protected_route(user=Depends(manager)):
+    return "Logged in successfully"
+
+
+@app.get("/logout")
+async def logout(request: Request, response: Response, user=Depends(manager)):
+    print(manager("access_token"))
+    response.delete_cookie("access_token")
+    return "logged out"
