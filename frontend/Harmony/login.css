@@ -61,6 +61,17 @@ body {
   border: 2px solid #133B5C;
   /* border-bottom: 5px solid #555; */
 }
+.dob_text{
+  font-size: 20px;
+  padding-right: 12px;
+}
+.dob{
+  width: 80%;
+  text-align: center;
+}
+#reg-form{
+  text-align: center;
+}
 .sub-btn {
   width: 100%;
   padding: 15px;
