@@ -51,19 +51,46 @@
       <div class="register-box">
         <h2>Register With Us!</h2>
         <form action="#" method="post" id="reg-form">
-          <input type="text" name="name" placeholder="Enter Name" class="inp" required autofocus /><br />
-          <input type="email" name="email" placeholder="Enter Email" class="inp" required /><br />
-          <span class="dob_text">DOB:</span><input type="date" name="dob" value="" class = "inp dob" required><br />
-          <input type="password" name="pass" placeholder="Enter Password" class="inp" required /><br />
-          <input type="password" name="repass" placeholder="Confirm Password" class="inp" required /><br />
-          <input type="submit" name="submit" value="SIGN UP" class="sub-btn" />
+          <input id="fname_" type="text" name="first_name" placeholder="Enter First Name" class="inp" required autofocus /><br />
+          <input id="lname_" type="text" name="last_name" placeholder="Enter Last Name" class="inp" required autofocus /><br />
+          <input id="email_" type="text" name="email" placeholder="Enter Email" class="inp" required /><br />
+          <span class="dob_text">DOB:</span><input id="dob_" type="text" name="dob" value="" class="inp dob" required><br />
+          <input id="pswd-" type="text" name="pass" placeholder="Enter Password" class="inp" required /><br />
+          <input id="cpswd_" type="text" name="repass" placeholder="Confirm Password" class="inp" required /><br />
+          <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp()" />
         </form>
+        <p id="signup_status"></p>
       </div>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src = "login.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const SignUp = () => {
+        axios
+          .post('http://localhost:90/signup/', {
+            "firstname": (document.getElementById("fname_").value),
+            "lastname": (document.getElementById("lname_").value),
+            "dob": (document.getElementById("dob_").value),
+            "email": (document.getElementById("email_").value),
+            "pswd": (document.getElementById("pswd_").value),
+            "cpswd": (document.getElementById("cpswd_").value)
+          });
+
+        console.log(toString(document.getElementById("fname_").value));
+        // "firstname": "string",
+        // "lastname": "string",
+        // "dob": "string",
+        // "email": "string",
+        // "pswd": "string",
+        // "cpswd": "string"
+
+
+
+      };
+    </script>
 
   </body>
 </html>

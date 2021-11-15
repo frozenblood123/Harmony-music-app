@@ -51,6 +51,7 @@ def signup(data: signup_data):
     existing_user = check_user(data["email"])
 
     if existing_user == True:
+        print("already exists")
         return "Email already registered, try again with another email"
 
     if data["pswd"] != data["cpswd"]:
@@ -60,6 +61,7 @@ def signup(data: signup_data):
 
     try:
         add_to_mongo(data, enc_pswd)
+        print("signup_successful")
         return "user created successfully, login with same credentials."
 
     except ConnectionError:
@@ -90,9 +92,9 @@ def login(data: login_data, response: Response):
                 data={'sub': data['email']}, expires=timedelta(days=365))
             #response = RedirectResponse(url='/dashboard', status_code=status.HTTP_302_FOUND)
             manager.set_cookie(response, access_token)
-            #resp = RedirectResponse(url="/protected")
+            #resp = RedirectResponse(url="/home-page")
             #return resp
-            #return "Login successful"
+            return "Login successful"
             #return {'access_token': access_token, 'token_type': 'bearer'}
         else:
             return "Incorrect password"
@@ -100,7 +102,7 @@ def login(data: login_data, response: Response):
         return "Something went wrong"
 
 
-@app.get('/protected')
+@app.get('/home-page')
 def protected_route(user=Depends(manager)):
     return "Logged in successfully"
 
