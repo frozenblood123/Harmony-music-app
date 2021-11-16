@@ -41,11 +41,12 @@
       <div class="login-box">
         <h2>Get Started!</h2>
         <form action="#" method="post" id="login-form">
-          <input type="text" name="email" placeholder="Email" class="inp" required autofocus /><br />
-          <input type="password" name="password" placeholder="Password" class="inp" required /><br />
+          <input id ="_email" type="text" name="email" placeholder="Email" class="inp" required autofocus /><br />
+          <input id ="_pswd" type="password" name="password" placeholder="Password" class="inp" required /><br />
           <a href="#" id="forgot">Forgot Password?</a><br />
-          <input type="submit" name="submit" value="SIGN IN" class="sub-btn" />
+          <input type="submit" name="submit" value="SIGN IN" class="sub-btn" onclick="LogIn(event)" />
         </form>
+        <p id="login_status"></p>
       </div>
       <!-- Registration Form -->
       <div class="register-box">
@@ -54,10 +55,10 @@
           <input id="fname_" type="text" name="first_name" placeholder="Enter First Name" class="inp" required autofocus /><br />
           <input id="lname_" type="text" name="last_name" placeholder="Enter Last Name" class="inp" required autofocus /><br />
           <input id="email_" type="text" name="email" placeholder="Enter Email" class="inp" required /><br />
-          <span class="dob_text">DOB:</span><input id="dob_" type="text" name="dob" value="" class="inp dob" required><br />
-          <input id="pswd-" type="text" name="pass" placeholder="Enter Password" class="inp" required /><br />
-          <input id="cpswd_" type="text" name="repass" placeholder="Confirm Password" class="inp" required /><br />
-          <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp()" />
+          <span class="dob_text">DOB:</span><input id="dob_" type="date" name="dob" value="" class="inp dob" required><br />
+          <input id="pswd_" type="password" name="pass" placeholder="Enter Password" class="inp" required /><br />
+          <input id="cpswd_" type="password" name="repass" placeholder="Confirm Password" class="inp" required /><br />
+          <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp(event)" />
         </form>
         <p id="signup_status"></p>
       </div>
@@ -68,26 +69,53 @@
     <script src = "login.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      const SignUp = () => {
-        axios
-          .post('http://localhost:90/signup/', {
-            "firstname": (document.getElementById("fname_").value),
-            "lastname": (document.getElementById("lname_").value),
-            "dob": (document.getElementById("dob_").value),
-            "email": (document.getElementById("email_").value),
-            "pswd": (document.getElementById("pswd_").value),
-            "cpswd": (document.getElementById("cpswd_").value)
+      const SignUp = (event) => {
+        event.preventDefault()
+        var firstname= document.getElementById("fname_").value;
+        var lastname= document.getElementById("lname_").value;
+        var dob= (document.getElementById("dob_").value).toString();
+        var email= document.getElementById("email_").value;
+        var pswd= document.getElementById("pswd_").value;
+        var cpswd= document.getElementById("cpswd_").value;
+        var signup_response  
+        axios.post('http://localhost:90/signup/', {
+            "firstname" : firstname,
+            "lastname" : lastname,
+            "dob" : dob,
+            "email" : email,
+            "pswd" : pswd,
+            "cpswd" : cpswd
+            
+          },  {})
+          .then(response => {
+            signup_response=response["data"];
+            console.log(signup_response);
+            document.getElementById("signup_status").innerHTML=signup_response;
+          })
+          .catch(err=> {
+            console.log(err);
           });
+      };
 
-        console.log(toString(document.getElementById("fname_").value));
-        // "firstname": "string",
-        // "lastname": "string",
-        // "dob": "string",
-        // "email": "string",
-        // "pswd": "string",
-        // "cpswd": "string"
+      const LogIn = (event) => {
+        event.preventDefault()
+        var email= document.getElementById("_email").value;
+        var pswd= document.getElementById("_pswd").value;
+        var login_response
+        axios.post('http://localhost:90/login/', {
+          "email" : email,
+            "pswd" : pswd
 
-
+        },{})
+        .then(response => {
+            login_response=response["data"];
+            console.log(signup_response);
+            document.getElementById("login_status").innerHTML=login_response;
+          })
+          .catch(err=> {
+            console.log(err);
+          });
+        
 
       };
     </script>
