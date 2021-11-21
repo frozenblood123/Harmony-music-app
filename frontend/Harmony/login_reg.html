@@ -38,7 +38,7 @@
           <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp(event)" />
         </form>
       </div>
-      <p id="signup_status">Successful!</p>
+      <p id="signup_status"></p>
     </div>
 
 
@@ -68,6 +68,16 @@
             signup_response=response["data"];
             console.log(signup_response);
             document.getElementById("signup_status").innerHTML=signup_response;
+            if(signup_response == "user created successfully, login with same credentials.")
+          {
+            document.getElementById("signup_status").style.color="green";
+            window.location.replace("home.html");
+          }
+
+          else
+          {
+            document.getElementById("signup_status").style.color="red";
+          }
           })
           .catch(err=> {
             console.log(err);
@@ -75,16 +85,7 @@
 
           //changing the color of status
 
-          if(signup_response === "successful")
-          {
-            document.getElementById("signup_status").style.color("green");
-            window.location.replace("home.html");
-          }
-
-          else
-          {
-            document.getElementById("signup_status").style.color("red");
-          }
+          
       };
 
       const LogIn = (event) => {
