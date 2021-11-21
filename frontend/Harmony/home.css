@@ -1,31 +1,43 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
-  color: #FCDAB7;
+  color: #fcdab7;
 }
 
-.app{
+.app {
   height: 100vh;
 }
 
-body{
+body {
   /* background-color: #133B5C; */
-  background-image: linear-gradient(180deg, #133B5C , #1E5F74);
+  background-image: linear-gradient(180deg, #133b5c, #1e5f74);
 }
 
-.logo{
-  font-family:URW Chancery L, cursive;
+/* .logo {
+  padding-top: 0px;
+  font-family: URW Chancery L, cursive;
   font-size: 40px;
+} */
+
+#logo_pad {
+  padding-top: 0px;
+  font-family: URW Chancery L, cursive;
+  font-size: 40px;
+  padding-right: 180px;
 }
 
-.profile_pic{
-  width:25px;
+.logo_sym {
+  padding-top: 0px;
+}
+
+.profile_pic {
+  width: 25px;
   height: 25px;
   border-radius: 50%;
 }
 
-.navbar{
-  background-color: #1D2D50;
+.navbar {
+  background-color: #1d2d50;
   height: 40px;
   /* width: 100%; */
   margin: 0px;
@@ -34,91 +46,96 @@ body{
   cursor: pointer;
 }
 
-.navbar ul
-  {
-    list-style-type: none;
-  }
+.navbar ul {
+  list-style-type: none;
+}
 
-.navbar li
-  {
-    float: left;
-  }
+.navbar li {
+  float: left;
+}
 
-.navbar li a
-  {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    padding: 20px;
-  }
+.navbar li a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 20px;
+}
 
-.navbar li a:hover
-  {
-    color: white;
-  }
+.navbar li a:hover {
+  color: white;
+}
 
-.sidebar{
-  clear:both;
+.sidebar {
+  clear: both;
   float: left;
   width: 19%;
   height: 800px;
-  border: 1px solid black;
+  border-right: 3px solid #1e5f74;
   text-align: center;
   /* transition: 0.2s white ease-in; */
 }
 
-.sidebar ul{
+.sidebar ul {
   margin: 0px;
   text-align: center;
 }
 
-.sidebar ul li{
+.sidebar ul li {
   list-style-type: none;
   font-size: 25px;
   padding: 10px;
 }
 
-.sidebar ul li a{
+.sidebar ul li a {
   margin: 10px;
   padding: 5px;
   text-decoration: none;
 }
 
-.sidebar ul li a:hover{
+.sidebar ul li a:hover {
   color: white;
 }
 
-.content-panel{
+.content-panel {
   float: right;
   width: 80%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 800px;
-
 }
 
-.container{
+.container {
   max-height: 300px;
   max-width: 100%;
 }
 
-.track_scroll{
+.track_scroll {
   display: flex;
   overflow: auto;
   white-space: nowrap;
 }
 
-.track{
+.track {
   width: 70px;
   float: left;
-  position:relative;
+  position: relative;
   padding: 30px;
   height: 100px;
 }
 
-.track img{
+.track:hover {
+  transform: scale(1.1);
+  transition-duration: 0.2s;
+  animation-timing-function: ease-in;
+}
+
+.track img {
   width: 70px;
 }
 
-.track p{
+.track p {
   text-align: center;
+}
+
+h2 {
+  padding: 10px 0px 0px 20px;
 }

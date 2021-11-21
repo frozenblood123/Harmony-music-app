@@ -37,8 +37,8 @@
           <input id="cpswd_" type="password" name="repass" placeholder="Confirm Password" class="inp" required /><br />
           <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp(event)" />
         </form>
-        <p id="signup_status"></p>
       </div>
+      <p id="signup_status">Successful!</p>
     </div>
 
 
@@ -72,6 +72,19 @@
           .catch(err=> {
             console.log(err);
           });
+
+          //changing the color of status
+
+          if(signup_response === "successful")
+          {
+            document.getElementById("signup_status").style.color("green");
+            window.location.replace("home.html");
+          }
+
+          else
+          {
+            document.getElementById("signup_status").style.color("red");
+          }
       };
 
       const LogIn = (event) => {
@@ -95,6 +108,8 @@
         
 
       };
+
+
     </script>
 
   </body>
