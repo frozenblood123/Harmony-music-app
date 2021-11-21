@@ -113,3 +113,9 @@ h2 {
   font-size: 22px;
   padding-bottom: 20px;
 }
+#login_status {
+  text-align: center;
+  background-color: #eee;
+  font-size: 22px;
+  padding-bottom: 20px;
+}
