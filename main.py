@@ -112,3 +112,9 @@ async def logout(request: Request, response: Response, user=Depends(manager)):
     print(manager("access_token"))
     response.delete_cookie("access_token")
     return "logged out"
+
+
+@app.post('/get_user/')
+async def get_user(email: str, user=Depends(manager)):
+    user_info = get_user_info(email)
+    return user_info

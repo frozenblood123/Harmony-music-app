@@ -37,3 +37,8 @@ def get_password(email):
 def verify_password(entered_pswd,stored_pswd):
     verification=sha256_crypt.verify(entered_pswd, stored_pswd)
     return verification
+
+
+def get_user_info(email):
+    info = profile.find_one({"email": email})
+    return info
