@@ -1,0 +1,33 @@
+.playlist_bar {
+  padding: 30px;
+}
+
+.playlist_bar input {
+  margin: 20px;
+  padding-left: 9px;
+  padding-right: 9px;
+  width: 30%;
+  position: relative;
+  display: block;
+  /* margin: 0 auto; */
+  height: 40px;
+  border-radius: 20px;
+  color: #133b5c;
+}
+
+.song_bar {
+  padding: 30px;
+}
+
+.song_bar input {
+  margin: 20px;
+  padding-left: 9px;
+  padding-right: 9px;
+  width: 20%;
+  position: relative;
+  display: block;
+  /* margin: 0 auto; */
+  height: 40px;
+  border-radius: 20px;
+  color: #133b5c;
+}

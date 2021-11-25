@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="player.css">
+    <link rel="stylesheet" href="playlist.css">
   </head>
   <body>
     <div className="app">
@@ -14,8 +15,7 @@
               <!--  style = "padding: 0px 1100px 0px 10px"; -->
               <li class="logo_sym"><a href="home.html" class="logo" id="logo_pad">Harmony</a></li>
               <li><a href="sub.html">My subscription</a></li>
-              <li><a href="login_reg.html">Login</a></li>
-              <li><a href="login_reg.html">Sign Up</a></li>
+              <li><a href="login_reg.html">Logout</a></li>
               <li><a href="profile.html"><img src="profile_pic.png" alt="" class="profile_pic" ></a></li>
               <li><a href="profile.html">Profile</a></li>
             </ul>
@@ -35,7 +35,7 @@
 
           <div class="content-panel">
             <div class="container">
-              <h2>Recently played</h2>
+              <h2>Playlist_1</h2>
               <div class="track_scroll">
                 <div class="track">
                   <img src="track_poster.jpeg" alt="">
@@ -98,7 +98,21 @@
             </div>
 
             <div class="container">
-              <h2>Heavy Metal</h2>
+              <h2>Create playlist:</h2>
+                <div class="playlist_bar">
+                  <input type="text" name="playlist_bar" value="" placeholder="Enter playlist name..." id="playlist">
+                </div>
+            </div>
+
+            <div class="container">
+              <h2>Songs:</h2>
+              <div class="song_bar">
+                <input type="text" name="song_bar" value="" placeholder="Enter song name..." id="songs">
+              </div>
+            </div>
+
+            <div class="container">
+              <h2>Playlist_name</h2>
               <div class="track_scroll">
                 <div class="track">
                   <img src="track_poster.jpeg" alt="">
@@ -107,25 +121,7 @@
               </div>
             </div>
 
-            <div class="container">
-              <h2>Heavy Metal</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="container">
-              <h2>Heavy Metal</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
-                </div>
-              </div>
-            </div>
+            
 
           </div>
 
