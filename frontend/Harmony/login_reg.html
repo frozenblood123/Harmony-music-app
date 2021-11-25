@@ -7,29 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" />
   </head>
   <body>
-    <!-- <div id = "main">
-      <div id = "tab-btn">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
-      </div>
-      <div class = "content">
-        <form id = "login-box" action="index.html" method="post">
-          <input type="text" name="" value="" placeholder="Email">
-          <input type="password" name="" value="" placeholder="Password">
-          <input type="submit" name="" value="Sign In">
-        </form>
-      </div>
-      <div class = "reg_content">
-        <form id = "reg-box" action="index.html" method="post">
-          <input type="text" name="" value="" placeholder="Enter first name">
-          <input type="text" name="" value="" placeholder="Enter last name">
-          <input type="email" name="" value="" placeholder="Enter E-mail">
-          <input type="password" name="" value="" placeholder="Enter password">
-          <input type="password" name="" value="" placeholder="Confirm password">
-          <input type="submit" name="" value="Sign Up">
-        </form>
-      </div>
-    </div> -->
 
     <div id="main">
       <!-- Tab Buttons -->
@@ -60,8 +37,8 @@
           <input id="cpswd_" type="password" name="repass" placeholder="Confirm Password" class="inp" required /><br />
           <input type="submit" name="submit" value="SIGN UP" class="sub-btn" onclick="SignUp(event)" />
         </form>
-        <p id="signup_status"></p>
       </div>
+      <p id="signup_status"></p>
     </div>
 
 
@@ -91,10 +68,27 @@
             signup_response=response["data"];
             console.log(signup_response);
             document.getElementById("signup_status").innerHTML=signup_response;
+            if(signup_response == "user created successfully, login with same credentials.")
+          {
+            document.getElementById("signup_status").style.color="green";
+            setTimeout(function(){
+              window.location.replace("login_reg.html");
+            }, 2000);
+            window.location.replace("login_reg.html");
+          }
+
+          else
+          {
+            document.getElementById("signup_status").style.color="red";
+          }
           })
           .catch(err=> {
             console.log(err);
           });
+
+          //changing the color of status
+
+          
       };
 
       const LogIn = (event) => {
@@ -111,6 +105,19 @@
             login_response=response["data"];
             console.log(login_response);
             document.getElementById("login_status").innerHTML=login_response;
+            if(login_response == "Login successful")
+          {
+            document.getElementById("login_status").style.color="green";
+            setTimeout(function(){
+              window.location.replace("login_reg.html");
+            }, 2000);
+            window.location.replace("home.html");
+          }
+
+          else
+          {
+            document.getElementById("login_status").style.color="red";
+          }
           })
           .catch(err1=> {
             console.log(err1);
@@ -118,6 +125,8 @@
         
 
       };
+
+
     </script>
 
   </body>

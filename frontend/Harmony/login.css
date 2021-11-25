@@ -8,7 +8,7 @@
 }
 body {
   /* background-color: #133B5C; */
-  background-image: linear-gradient(180deg, #133B5C , #1E5F74);
+  background-image: linear-gradient(180deg, #133b5c, #1e5f74);
   display: flex;
   min-height: 100vh;
   justify-content: center;
@@ -58,18 +58,18 @@ body {
 }
 .inp:focus {
   outline: none;
-  border: 2px solid #133B5C;
+  border: 2px solid #133b5c;
   /* border-bottom: 5px solid #555; */
 }
-.dob_text{
+.dob_text {
   font-size: 20px;
   padding-right: 12px;
 }
-.dob{
+.dob {
   width: 80%;
   text-align: center;
 }
-#reg-form{
+#reg-form {
   text-align: center;
 }
 .sub-btn {
@@ -86,7 +86,7 @@ body {
 .sub-btn:focus {
   outline: none;
 }
-.sub-btn:hover{
+.sub-btn:hover {
   transform: scale(1.02);
 }
 .sub-btn:active {
@@ -106,4 +106,16 @@ h2 {
   /* font-variant: small-caps; */
   color: #333;
   font-size: 30px;
+}
+#signup_status {
+  text-align: center;
+  background-color: #eee;
+  font-size: 22px;
+  padding-bottom: 20px;
+}
+#login_status {
+  text-align: center;
+  background-color: #eee;
+  font-size: 22px;
+  padding-bottom: 20px;
 }

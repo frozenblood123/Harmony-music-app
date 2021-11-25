@@ -22,7 +22,7 @@ let curr_track = document.createElement('audio');
 // Define the tracks that have to be played
 let track_list = [
   {
-    name: "Bad-Habits",
+    name: "Bad Habits",
     artist: "Ed Sheeran",
     image: "./track_poster.jpeg",
     path: "Bad_Habits.mp3"
@@ -45,7 +45,24 @@ let track_list = [
     image: "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
     path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
   },
-
+  {
+    name: "Date",
+    artist: "Radwimps",
+    image: "./images/Date.jpg",
+    path: "./songs/Date.mp3",
+  },
+  {
+    name: "Gurenge",
+    artist: "LiSA",
+    image: "./images/Gurenge.jpg",
+    path: "./songs/Gurenge.mp3",
+  },
+  {
+    name: "Graveyard",
+    artist: "Halsey",
+    image: "./images/Graveyard.jpeg",
+    path: "./songs/Graveyard.mp3",
+  },
 ];
 
 // function random_bg_color() {
@@ -150,4 +167,53 @@ function seekUpdate() {
     curr_time.textContent = currentMinutes + ":" + currentSeconds;
     total_duration.textContent = durationMinutes + ":" + durationSeconds;
   }
+}
+
+
+for (var i=0; i<document.querySelectorAll(".track").length; i++)
+{
+  document.querySelectorAll(".track")[i].addEventListener("click", function ()
+  {
+    let track_click = this;
+    select_track(track_click);
+    
+  });
+}
+
+function select_track(track_click){
+  // let track_click = document.querySelector(".track");
+  track_name2 = track_click.querySelector("p").textContent;
+  console.log(track_name2);
+  track_index = 0;
+  for(track_index=0; track_index<track_list.length; track_index++)
+  {
+    if(track_list[track_index].name == track_name2)
+    {
+      loadTrack(track_index);
+      playTrack();
+      break;
+    }
+  }
+  console.log(track_index);
+}
+
+document.querySelector('#search_bar').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    search();
+  }
+});
+
+function search(){
+  track_name2 = document.querySelector("#search_bar").value;
+  console.log(track_name2);
+  for(track_index=0; track_index<track_list.length; track_index++)
+  {
+    if(track_list[track_index].name == track_name2)
+    {
+      loadTrack(track_index);
+      playTrack();
+      break;
+    }
+  }
+  console.log(track_index);
 }
