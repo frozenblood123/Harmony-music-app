@@ -110,7 +110,8 @@ body {
 
 .track_scroll {
   display: flex;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   white-space: nowrap;
 }
 
