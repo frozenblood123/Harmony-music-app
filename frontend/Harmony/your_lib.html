@@ -102,25 +102,21 @@
               <h2>Create playlist:</h2>
                 <div class="playlist_bar">
                   <input type="text" name="playlist_bar" value="" placeholder="Enter playlist name..." id="playlist">
-                  <a href="#" class="button">Create Playlist</a>
+                  <a class="button" onclick = "create_playlist()">Create Playlist</a>
                 </div>
             </div>
 
             <div class="container">
-              <h2>Songs:</h2>
+              <h2>Add To Playlist:</h2>
               <div class="song_bar">
-                <input type="text" name="song_bar" value="" placeholder="Enter song name..." id="songs">
+                <input type="text" name="playlist" value="" placeholder="Enter playlist name..." id="playlist_">
+                <br>
+                <input type="text" name="song" value="" placeholder="Enter song name..." id="songs">
+                <br><br>
+                <a  class="button" onclick = "playlist()">Add song</a>
+                <a  class="button" onclick = "add_songs_to_playlist()">Add songs to playlist</a>
               </div>
             </div>
-
-            <div class="container">
-              <h2>Playlist_name</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
-                </div>
-              </div>
             </div>
 
             
@@ -155,5 +151,29 @@
 
     <script src="player.js" charset="utf-8"></script>
     <script src="profile_name.js"></script>
+    <script>
+      var songs_to_add = [];
+      var playlist_name = "MyPlaylist";
+
+      function create_playlist(){
+        playlist_name = document.querySelector("#playlist").value;
+        console.log(playlist_name);
+      }
+
+      function playlist(){
+        song_name = document.querySelector("#songs").value;
+        songs_to_add.push(song_name);
+        playlist_name = document.querySelector("#playlist_").value;
+        console.log(songs_to_add);
+      }
+
+      function add_songs_to_playlist(){
+        console.log(playlist_name);
+        console.log(songs_to_add);
+      }
+      
+
+
+    </script>
   </body>
 </html>
