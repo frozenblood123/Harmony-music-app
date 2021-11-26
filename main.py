@@ -114,7 +114,21 @@ async def logout(request: Request, response: Response, user=Depends(manager)):
     return "logged out"
 
 
-@app.post('/get_user/')
+@app.post('/get-user/')
 async def get_user(email: str, user=Depends(manager)):
     user_info = get_user_info(email)
     return user_info
+
+@app.get('/search-song/')
+async def search_song(search_name: str, type: str, user=Depends(manager)):
+    search_type=type
+    if search_type == "song":
+        songs = search_songs_song(search_name)
+    elif search_type == "artist":
+        songs = search_songs_artist(search_name)
+    elif search_type == "album":
+        songs = search_songs_album(search_name)
+    else:
+        return "Invalid search type"
+    return songs
+
