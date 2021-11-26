@@ -153,3 +153,14 @@ async def create_playlist(playlist_name: str, user=Depends(manager), songs: list
     else:
         playlist_status = create_new_playlist(user_email, playlist_name, songs)
         return playlist_status
+
+@app.post('/add-to-playlist/')
+async def add_to_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
+    playlist_name = playlist_name.lower()
+    user_email=user
+    check_playlist = check_playlist_name(playlist_name, user_email)
+    if check_playlist == False:
+        return "Playlist doesn't exist"
+    else:
+        playlist_status = add_to_playlist_db(user_email, playlist_name, songs)
+        return playlist_status

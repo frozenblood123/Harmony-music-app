@@ -23,11 +23,20 @@ def encrypt_password(pswd):
     enc_pswd = sha256_crypt.encrypt(pswd)
     return enc_pswd
 
+data={
+  "firstname": "string",
+  "lastname": "string",
+  "dob": "string",
+  "email": "string",
+  "pswd": "string",
+  "cpswd": "string"
+}
 
 def add_to_mongo(data, enc_pswd):
     data.pop("pswd")
     data.pop("cpswd")
     data.update(pswd=enc_pswd)
+    data.update(playlists={"name": [], "playlist_songs": {}})
     profile.insert_one(data)
 
 
@@ -109,5 +118,14 @@ def create_new_playlist(playlist_name, user_email, songs=[]):
     except:
         return "Error creating playlist"
 
+def add_to_playlist_db(playlist_name, user_email, song=[]): 
+    try:
+        user_profile = profile.find_one({"email": user_email})
+        user_profile["playlists"]["playlist_songs"][playlist_name].extend(song)
+        profile.update_one({"email": user_email}, {"$set": user_profile})
+        return "Song added to playlist"
+    except:
+        return "Error adding song to playlist"
 
-create_new_playlist("test", "harsh13092001@gmail.com")
+#add_to_playlist_db("test", "harsh13092001@gmail.com",["song5"])
+#add_to_mongo(data, encrypt_password("harsh"))   
