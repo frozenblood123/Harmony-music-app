@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="player.css">
+    <link rel="stylesheet" href="playlist.css">
+    <link rel="stylesheet" href="profile.css">
   </head>
   <body>
     <div className="app">
@@ -14,10 +16,9 @@
               <!--  style = "padding: 0px 1100px 0px 10px"; -->
               <li class="logo_sym"><a href="home.html" class="logo" id="logo_pad">Harmony</a></li>
               <li><a href="sub.html">My subscription</a></li>
-              <li><a href="login_reg.html">Login</a></li>
-              <li><a href="login_reg.html">Sign Up</a></li>
+              <li><a href="login_reg.html">Logout</a></li>
               <li><a href="profile.html"><img src="profile_pic.png" alt="" class="profile_pic" ></a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li id = "user_fname"><a href="profile.html">Profile</a></li>
             </ul>
           </div>
           <hr>
@@ -35,7 +36,7 @@
 
           <div class="content-panel">
             <div class="container">
-              <h2>Recently played</h2>
+              <h2>Playlist_1</h2>
               <div class="track_scroll">
                 <div class="track">
                   <img src="track_poster.jpeg" alt="">
@@ -98,34 +99,27 @@
             </div>
 
             <div class="container">
-              <h2>Heavy Metal</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
+              <h2>Create playlist:</h2>
+                <div class="playlist_bar">
+                  <input type="text" name="playlist_bar" value="" placeholder="Enter playlist name..." id="playlist">
+                  <a class="button" onclick = "create_playlist()">Create Playlist</a>
                 </div>
-              </div>
             </div>
 
             <div class="container">
-              <h2>Heavy Metal</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
-                </div>
+              <h2>Add To Playlist:</h2>
+              <div class="song_bar">
+                <input type="text" name="playlist" value="" placeholder="Enter playlist name..." id="playlist_">
+                <br>
+                <input type="text" name="song" value="" placeholder="Enter song name..." id="songs">
+                <br><br>
+                <a  class="button" onclick = "playlist()">Add song</a>
+                <a  class="button" onclick = "add_songs_to_playlist()">Add songs to playlist</a>
               </div>
+            </div>
             </div>
 
-            <div class="container">
-              <h2>Heavy Metal</h2>
-              <div class="track_scroll">
-                <div class="track">
-                  <img src="track_poster.jpeg" alt="">
-                  <p>Title</p>
-                </div>
-              </div>
-            </div>
+            
 
           </div>
 
@@ -156,5 +150,30 @@
     </div>
 
     <script src="player.js" charset="utf-8"></script>
+    <script src="profile_name.js"></script>
+    <script>
+      var songs_to_add = [];
+      var playlist_name = "MyPlaylist";
+
+      function create_playlist(){
+        playlist_name = document.querySelector("#playlist").value;
+        console.log(playlist_name);
+      }
+
+      function playlist(){
+        song_name = document.querySelector("#songs").value;
+        songs_to_add.push(song_name);
+        playlist_name = document.querySelector("#playlist_").value;
+        console.log(songs_to_add);
+      }
+
+      function add_songs_to_playlist(){
+        console.log(playlist_name);
+        console.log(songs_to_add);
+      }
+      
+
+
+    </script>
   </body>
 </html>

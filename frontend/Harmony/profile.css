@@ -1,21 +1,21 @@
-.name img{
+.name img {
   padding: 30px;
   border-radius: 50%;
   height: 200px;
   width: 200px;
 }
 
-.name{
+.name {
   display: flex;
   align-items: center;
 }
 
-.Email{
+.Email {
   display: flex;
   align-items: center;
 }
 
-.email_input{
+.email_input {
   /* margin: 20px; */
   padding-left: 9px;
   padding-right: 9px;
@@ -24,14 +24,27 @@
   display: block; */
   height: 40px;
   border-radius: 20px;
-  color: #133B5C;
+  color: #133b5c;
+}
+
+.pass_input {
+  /* margin: 20px; */
+  padding-left: 9px;
+  padding-right: 9px;
+  margin-top: 20px;
+  width: 40%;
+  /* position: relative;
+  display: block; */
+  height: 40px;
+  border-radius: 20px;
+  color: #133b5c;
 }
 
 .button {
-  background-color: #38A3A5;
+  background-color: #38a3a5;
   border-radius: 12px;
   border: none;
-  color: #FCDAB7;
+  color: #fcdab7;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
