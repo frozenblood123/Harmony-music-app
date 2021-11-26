@@ -112,3 +112,55 @@ async def logout(request: Request, response: Response, user=Depends(manager)):
     print(manager("access_token"))
     response.delete_cookie("access_token")
     return "logged out"
+
+
+@app.post('/get-user/')
+async def get_user(email: str, user=Depends(manager)):
+    user_info = get_user_info(email)
+    return user_info
+
+@app.get('/search-song/')
+async def search_song(search_name: str, type: str, user=Depends(manager)):
+    search_type=type
+    if search_type == "song":
+        songs = search_songs_song(search_name)
+    elif search_type == "artist":
+        songs = search_songs_artist(search_name)
+    elif search_type == "album":
+        songs = search_songs_album(search_name)
+    else:
+        return "Invalid search type"
+    return songs
+
+@app.get('/all-songs/')
+async def get_all_songs(user=Depends(manager)):
+    songs = get_all_songs()
+    return songs
+
+@app.get('/all-playlists')
+async def get_all_playlists(user=Depends(manager)):
+    user_email=user
+    playlists = get_all_playlists_db(user_email)
+    return playlists
+
+@app.post('/create-playlist/')
+async def create_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
+    playlist_name = playlist_name.lower()
+    user_email=user
+    check_playlist = check_playlist_name(playlist_name, user_email)
+    if check_playlist == True:
+        return "Playlist already exists"
+    else:
+        playlist_status = create_new_playlist(user_email, playlist_name, songs)
+        return playlist_status
+
+@app.post('/add-to-playlist/')
+async def add_to_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
+    playlist_name = playlist_name.lower()
+    user_email=user
+    check_playlist = check_playlist_name(playlist_name, user_email)
+    if check_playlist == False:
+        return "Playlist doesn't exist"
+    else:
+        playlist_status = add_to_playlist_db(user_email, playlist_name, songs)
+        return playlist_status
