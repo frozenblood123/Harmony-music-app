@@ -1,16 +1,29 @@
-.search_bar{
+.search_bar {
   padding: 30px;
 }
 
-.search_bar input{
+.search_bar input {
   margin: 20px;
   padding-left: 9px;
   padding-right: 9px;
   width: 50%;
   position: relative;
   display: block;
-  margin : 0 auto;
+  margin: 0 auto;
   height: 40px;
   border-radius: 20px;
-  color: #133B5C;
+  color: #133b5c;
+}
+
+/* select {
+  width: 10px;
+  font-size: large;
+  height: 50px;
+} */
+
+#search_by {
+  width: 10%;
+  font-size: large;
+  height: 30px;
+  color: #133b5c;
 }

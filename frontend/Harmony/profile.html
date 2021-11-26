@@ -15,7 +15,7 @@
               <li><a href="sub.html">My subscription</a></li>
               <li><a href="login_reg.html">Logout</a></li>
               <li><a href="profile.html"><img src="profile_pic.png" alt="" class="profile_pic" ></a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li id = "user_fname"><a href="profile.html">Profile</a></li>
             </ul>
           </div>
           <hr>
@@ -34,17 +34,27 @@
           <div class="content-panel">
             <div class="name">
               <img src="profile_pic.png" alt="" class="profile">
-              <h4>Name</h4>
+              <h4 id = "user_fname2">Name</h4>
             </div>
             <div class="E-mail">
               Email:
-              <input type="text" name="" value="veer@gmail.com" class="email_input" readonly>
-              <button type="button" name="button" class="button">Change E-Mail</button>
+              <input type="text" name="" value="veer@gmail.com" class="email_input" readonly id = "email_field">
+              <button type="button" name="button" class="button" >Change E-Mail</button>
             </div>
             <br>
             <a href="#" class="button">Change Password</a>
           </div>
 
     </div>
+    <script src="profile_name.js"></script>
+    <script>
+     var profile_page_name = document.querySelector("#user_fname2").innerHTML;
+     var email = document.querySelector("#email_field");
+
+     document.querySelector("#user_fname2").innerHTML = profile_page_name.replace("Name", user_curr.firstname);
+     email.value = user_curr.email;
+
+    // onclick(){ document.querySelector("email_field").removeAttribute("readonly")};
+    </script>
   </body>
 </html>

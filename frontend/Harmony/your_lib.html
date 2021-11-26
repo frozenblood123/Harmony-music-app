@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="player.css">
     <link rel="stylesheet" href="playlist.css">
+    <link rel="stylesheet" href="profile.css">
   </head>
   <body>
     <div className="app">
@@ -17,7 +18,7 @@
               <li><a href="sub.html">My subscription</a></li>
               <li><a href="login_reg.html">Logout</a></li>
               <li><a href="profile.html"><img src="profile_pic.png" alt="" class="profile_pic" ></a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li id = "user_fname"><a href="profile.html">Profile</a></li>
             </ul>
           </div>
           <hr>
@@ -101,6 +102,7 @@
               <h2>Create playlist:</h2>
                 <div class="playlist_bar">
                   <input type="text" name="playlist_bar" value="" placeholder="Enter playlist name..." id="playlist">
+                  <a href="#" class="button">Create Playlist</a>
                 </div>
             </div>
 
@@ -152,5 +154,6 @@
     </div>
 
     <script src="player.js" charset="utf-8"></script>
+    <script src="profile_name.js"></script>
   </body>
 </html>

@@ -17,7 +17,7 @@
               <li><a href="sub.html">My subscription</a></li>
               <li><a href="login_reg.html">Logout</a></li>
               <li><a href="profile.html"><img src="profile_pic.png" alt="" class="profile_pic" ></a></li>
-              <li><a href="profile.html">Profile</a></li>
+              <li id = "user_fname"><a href="profile.html">Profile</a></li>
             </ul>
           </div>
           <hr>
@@ -36,6 +36,12 @@
           <div class="content-panel">
             <div class="search_bar">
               <input type="text" name="search_bar" value="" placeholder="Search Music..." id="search_bar">
+              Search_by:
+              <select name="search_by" id="search_by">
+                <option value="name">Name</option>
+                <option value="artist">artist</option>
+                <option value="album">album</option>
+              </select>
             </div>
             <div class="container">
               <h2>Recently Searched</h2>
@@ -139,7 +145,8 @@
     </div>
 
       <!-- Load the main script for the player -->
-      <script src="search.js"></script>
+      <!-- <script src="search.js"></script> -->
       <script src="player.js"></script>
+      <script src="profile_name.js"></script>
   </body>
 </html>
