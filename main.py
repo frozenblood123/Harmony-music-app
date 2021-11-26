@@ -132,3 +132,24 @@ async def search_song(search_name: str, type: str, user=Depends(manager)):
         return "Invalid search type"
     return songs
 
+@app.post('/all-songs/')
+async def get_all_songs(user=Depends(manager)):
+    songs = get_all_songs()
+    return songs
+
+@app.post('/all-playlists')
+async def get_all_playlists(user=Depends(manager)):
+    user_email=user
+    playlists = get_all_playlists_db(user_email)
+    return playlists
+
+@app.post('/create-playlist/')
+async def create_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
+    playlist_name = playlist_name.lower()
+    user_email=user
+    check_playlist = check_playlist_name(playlist_name, user_email)
+    if check_playlist == True:
+        return "Playlist already exists"
+    else:
+        playlist_status = create_new_playlist(user_email, playlist_name, songs)
+        return playlist_status
