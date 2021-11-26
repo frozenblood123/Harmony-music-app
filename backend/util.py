@@ -43,16 +43,62 @@ def verify_password(entered_pswd, stored_pswd):
 
 
 def get_user_info(email):
+    user_info = {}
     info = profile.find_one({"email": email})
-    return info
+    for i in info:
+        if i != "_id" and i != "pswd":
+            user_info[i] = info[i]
+    return user_info
 
 
 def search_songs_song(search_name):
-    retrived_songs=[]
+    retrived_songs = []
     info = profile_songs.find({"_song": search_name})
     for i in info:
+        i.pop("_id")
         retrived_songs.append(i)
     return retrived_songs
     #return info
 
-print(search_songs_song("Date"))
+
+def search_songs_artist(search_name):
+    retrived_songs = []
+    info = profile_songs.find({"_artist": search_name})
+    for i in info:
+        i.pop("_id")
+        retrived_songs.append(i)
+    return retrived_songs
+    #return info
+
+
+def search_songs_album(search_name):
+    retrived_songs = []
+    info = profile_songs.find({"_album": search_name})
+    for i in info:
+        i.pop("_id")
+        retrived_songs.append(i)
+    return retrived_songs
+    #return info
+
+
+def get_all_songs():
+    retrived_songs = []
+    info = profile_songs.find()
+    for i in info:
+        i.pop("_id")
+        retrived_songs.append(i)
+    return retrived_songs
+    #return info
+# print(get_all_songs())
+
+
+def check_playlist_name(playlist_name, user_email):
+    user_profile = profile.find_one({"email": user_email})
+    for i in user_profile["playlists"]['name']:
+        if i == playlist_name:
+            return True
+        else:
+            return False
+
+
+check_playlist_name("myPlaylist1", "harsh13092001@gmail.com")
