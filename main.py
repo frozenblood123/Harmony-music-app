@@ -132,12 +132,12 @@ async def search_song(search_name: str, type: str, user=Depends(manager)):
         return "Invalid search type"
     return songs
 
-@app.post('/all-songs/')
+@app.get('/all-songs/')
 async def get_all_songs(user=Depends(manager)):
     songs = get_all_songs()
     return songs
 
-@app.post('/all-playlists')
+@app.get('/all-playlists')
 async def get_all_playlists(user=Depends(manager)):
     user_email=user
     playlists = get_all_playlists_db(user_email)
