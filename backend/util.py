@@ -58,8 +58,6 @@ def search_songs_song(search_name):
         i.pop("_id")
         retrived_songs.append(i)
     return retrived_songs
-    #return info
-
 
 def search_songs_artist(search_name):
     retrived_songs = []
@@ -68,8 +66,6 @@ def search_songs_artist(search_name):
         i.pop("_id")
         retrived_songs.append(i)
     return retrived_songs
-    #return info
-
 
 def search_songs_album(search_name):
     retrived_songs = []
@@ -78,8 +74,6 @@ def search_songs_album(search_name):
         i.pop("_id")
         retrived_songs.append(i)
     return retrived_songs
-    #return info
-
 
 def get_all_songs():
     retrived_songs = []
@@ -88,9 +82,6 @@ def get_all_songs():
         i.pop("_id")
         retrived_songs.append(i)
     return retrived_songs
-    #return info
-# print(get_all_songs())
-
 
 def check_playlist_name(playlist_name, user_email):
     user_profile = profile.find_one({"email": user_email})
@@ -101,4 +92,22 @@ def check_playlist_name(playlist_name, user_email):
             return False
 
 
-check_playlist_name("myPlaylist1", "harsh13092001@gmail.com")
+def get_all_playlists_db(user_email):
+    user_profile = profile.find_one({"email": user_email})
+    retrived_playlists = user_profile["playlists"]
+    return retrived_playlists
+
+
+def create_new_playlist(playlist_name, user_email, songs=[]):
+    try:
+        user_profile = profile.find_one({"email": user_email})
+        user_profile["playlists"]["name"].append(playlist_name)
+        user_profile["playlists"]["playlist_songs"].update(
+            {playlist_name: songs})
+        profile.update_one({"email": user_email}, {"$set": user_profile})
+        return "Playlist created successfully"
+    except:
+        return "Error creating playlist"
+
+
+create_new_playlist("test", "harsh13092001@gmail.com")
