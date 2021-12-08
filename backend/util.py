@@ -94,11 +94,17 @@ def get_all_songs():
 
 def check_playlist_name(playlist_name, user_email):
     user_profile = profile.find_one({"email": user_email})
-    for i in user_profile["playlists"]['name']:
+    found_playlist=0
+    for i in user_profile["playlists"]["name"]:
         if i == playlist_name:
-            return True
+            found_playlist=1
+            break
         else:
-            return False
+            continue
+    if found_playlist==1:
+        return True
+    else:
+        return False
 
 
 def get_all_playlists_db(user_email):
@@ -127,5 +133,5 @@ def add_to_playlist_db(playlist_name, user_email, song=[]):
     except:
         return "Error adding song to playlist"
 
-create_new_playlist("test", "test@gmail.com",["song5"])
+# create_new_playlist("test", "test@gmail.com",["song5"])
 #add_to_mongo(data, encrypt_password("harsh"))   

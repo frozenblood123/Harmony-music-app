@@ -114,7 +114,7 @@
                 <input type="text" name="song" value="" placeholder="Enter song name..." id="songs">
                 <br><br>
                 <a  class="button" onclick = "playlist()">Add song</a>
-                <a  class="button" onclick = "add_songs_to_playlist()">Add songs to playlist</a>
+                <a  class="button" onclick = "AddToPlaylist(event)">Add songs to playlist</a>
               </div>
             </div>
             </div>
@@ -181,6 +181,28 @@
         // var pswd= document.getElementById("_pswd").value;
         // var login_response
         axios.post('http://localhost:90/create-playlist/', {
+          "songs": songs_to_add,
+          "playlist_name":playlist_name
+          
+        },{})
+        .then(response => {
+            login_response=response["data"];
+            console.log(login_response);
+          })
+          .catch(err1=> {
+            console.log(err1);
+          });
+        
+      
+
+      };
+      const AddToPlaylist = (event) => {
+        event.preventDefault()
+        playlist_name = document.querySelector("#playlist_").value;
+        // var email= document.getElementById("_email").value;
+        // var pswd= document.getElementById("_pswd").value;
+        // var login_response
+        axios.post('http://localhost:90/add-to-playlist/', {
           "songs": songs_to_add,
           "playlist_name":playlist_name
           

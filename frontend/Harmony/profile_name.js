@@ -7,24 +7,24 @@ var user_curr = {
   "dob" : "12/03/2000",
   "email" : "veerigcse@gmail.com",
 };
-
 axios.post('http://localhost:90/get-user/', {
-          "email" : email
+  "email": "harsh13092001@gmail.com"
 
-        },{})
-        .then(response => {
-            user_response=response["data"];
-            user_curr["firstname"]=user_response["firstname"];
-            user_curr["lastname"]=user_response["lastname"];
-            
-            user_curr["email"]=user_response["email"];
-            user_curr["dob"]=user_response["dob"];
+}, {})
+  .then(response => {
+    user_response = response["data"];
+    user_curr.firstname = user_response.firstname;
+    user_curr.lastname = user_response.lastname;
 
-            
-          })
-          .catch(err1=> {
-            console.log(err1);
-          });
+    user_curr.email = user_response.email;
+    user_curr.dob = user_response.dob;
+    console.log(user_curr);
+
+  })
+  .catch(err1 => {
+    console.log(err1);
+  });
+
 
 
 

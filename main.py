@@ -45,6 +45,17 @@ class login_data(BaseModel):
     email: str
     pswd: str
 
+class user_data(BaseModel):
+    email: str
+
+class PlaylistData(BaseModel):
+    playlist_name: str
+    songs: list
+
+class SongData(BaseModel):
+    name: str
+    type: str
+
 @app.post("/signup/")
 def signup(data: signup_data):
     data = data.dict()
@@ -76,6 +87,7 @@ manager = LoginManager(SECRET, token_url='/login/', use_cookie=True)
 def load_user(email: str):
     user = email
     return user
+
 
 @app.post("/login/")
 def login(data: login_data, response: Response):
@@ -115,13 +127,20 @@ async def logout(request: Request, response: Response, user=Depends(manager)):
 
 
 @app.post('/get-user/')
-async def get_user(email: str, user=Depends(manager)):
-    user_info = get_user_info(email)
+async def get_user(data: user_data):
+    data = data.dict()
+    user = load_user(data["email"])
+    user_email = user
+    user_info = get_user_info(user_email)
     return user_info
 
+
 @app.get('/search-song/')
-async def search_song(search_name: str, type: str, user=Depends(manager)):
-    search_type=type
+async def search_song(data:SongData, user=Depends(manager)):
+    data = data.dict()
+    search_name = data["name"]
+    search_type = data["type"]
+    search_type = type
     if search_type == "song":
         songs = search_songs_song(search_name)
     elif search_type == "artist":
@@ -132,38 +151,42 @@ async def search_song(search_name: str, type: str, user=Depends(manager)):
         return "Invalid search type"
     return songs
 
+
 @app.get('/all-songs/')
 async def get_all_songs(user=Depends(manager)):
     songs = get_all_songs()
     return songs
 
+
 @app.get('/all-playlists')
 async def get_all_playlists(user=Depends(manager)):
-    user_email=user
+    user_email = user
     playlists = get_all_playlists_db(user_email)
     return playlists
-class CreateNewPlaylist(BaseModel):
-    playlist_name: str
-    songs: list
+
 
 @app.post('/create-playlist/')
-async def create_playlist(data:CreateNewPlaylist):
+async def create_playlist(data: PlaylistData):
+    data = data.dict()
+    playlist_name = data["playlist_name"]
+    songs = data["songs"]
+    playlist_name = playlist_name.lower()
+    user_email = "harsh13092001@gmail.com"
+    check_playlist = check_playlist_name(playlist_name, user_email)
+    if check_playlist == True:
+        return "Playlist already exists"
+    else:
+        playlist_status = create_new_playlist(playlist_name, user_email, songs)
+        return playlist_status
+
+
+@app.post('/add-to-playlist/')
+async def add_to_playlist(data: PlaylistData):
     data = data.dict()
     playlist_name = data["playlist_name"]
     songs = data["songs"]
     playlist_name = playlist_name.lower()
     user_email="harsh13092001@gmail.com"
-    check_playlist = check_playlist_name(playlist_name, user_email)
-    if check_playlist == True:
-        return "Playlist already exists"
-    else:
-        playlist_status = create_new_playlist(playlist_name,user_email, songs)
-        return playlist_status
-
-@app.post('/add-to-playlist/')
-async def add_to_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
-    playlist_name = playlist_name.lower()
-    user_email=user
     check_playlist = check_playlist_name(playlist_name, user_email)
     if check_playlist == False:
         return "Playlist doesn't exist"
