@@ -142,16 +142,22 @@ async def get_all_playlists(user=Depends(manager)):
     user_email=user
     playlists = get_all_playlists_db(user_email)
     return playlists
+class CreateNewPlaylist(BaseModel):
+    playlist_name: str
+    songs: list
 
 @app.post('/create-playlist/')
-async def create_playlist(playlist_name: str, user=Depends(manager), songs: list = []):
+async def create_playlist(data:CreateNewPlaylist):
+    data = data.dict()
+    playlist_name = data["playlist_name"]
+    songs = data["songs"]
     playlist_name = playlist_name.lower()
-    user_email=user
+    user_email="harsh13092001@gmail.com"
     check_playlist = check_playlist_name(playlist_name, user_email)
     if check_playlist == True:
         return "Playlist already exists"
     else:
-        playlist_status = create_new_playlist(user_email, playlist_name, songs)
+        playlist_status = create_new_playlist(playlist_name,user_email, songs)
         return playlist_status
 
 @app.post('/add-to-playlist/')
@@ -162,5 +168,5 @@ async def add_to_playlist(playlist_name: str, user=Depends(manager), songs: list
     if check_playlist == False:
         return "Playlist doesn't exist"
     else:
-        playlist_status = add_to_playlist_db(user_email, playlist_name, songs)
+        playlist_status = add_to_playlist_db( playlist_name, user_email, songs)
         return playlist_status

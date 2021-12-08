@@ -127,5 +127,5 @@ def add_to_playlist_db(playlist_name, user_email, song=[]):
     except:
         return "Error adding song to playlist"
 
-#add_to_playlist_db("test", "harsh13092001@gmail.com",["song5"])
+create_new_playlist("test", "test@gmail.com",["song5"])
 #add_to_mongo(data, encrypt_password("harsh"))   

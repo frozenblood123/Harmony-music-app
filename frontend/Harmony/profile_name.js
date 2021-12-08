@@ -1,9 +1,32 @@
+
+document.writeln("<script type='text/javascript' src='https://unpkg.com/axios/dist/axios.min.js'></script>");
+
 var user_curr = {
-    "firstname": "veerabhadra",
-    "lastname" : "Khandelot",
-    "dob" : "12/03/2000",
-    "email" : "veerigcse@gmail.com",
-  };
+  "firstname": "veerabhadra",
+  "lastname" : "Khandelot",
+  "dob" : "12/03/2000",
+  "email" : "veerigcse@gmail.com",
+};
+
+axios.post('http://localhost:90/get-user/', {
+          "email" : email
+
+        },{})
+        .then(response => {
+            user_response=response["data"];
+            user_curr["firstname"]=user_response["firstname"];
+            user_curr["lastname"]=user_response["lastname"];
+            
+            user_curr["email"]=user_response["email"];
+            user_curr["dob"]=user_response["dob"];
+
+            
+          })
+          .catch(err1=> {
+            console.log(err1);
+          });
+
+
 
 var profile_name = document.querySelector("#user_fname").innerHTML;
 // var profile_page_name = document.querySelector("#user_fname2").innerHTML;
