@@ -44,17 +44,22 @@
             <br>
             <input type="password" placeholder = "old password" name="old_password" value="" class="pass_input">
             <br>
-            <input type="password" placeholder = "new password" name="new_password" value="" class="pass_input">
-            <a href="#" class="button">Change Password</a>
-          </div>
+            <input type="password" placeholder="new password" name="old_password" value="" class="pass_input">
+            <br>
+            <input type="password" placeholder="confirm password" name="new_password" value="" class="pass_input">
+            <a href="#" onclick = "changePassword()" class="button">Change Password</a>
+            <div id="cp" ></div>
+          </div> 
 
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="profile_name.js"></script>
     <script>
-      
+    
 
-      
+     function changePassword(){
+      document.querySelector("#cp").innerHTML="Passwords changed successfully!"
+     } 
      var profile_page_name = document.querySelector("#user_fname2").innerHTML;
      var email = document.querySelector("#email_field");
 
